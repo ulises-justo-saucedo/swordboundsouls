@@ -23,7 +23,7 @@ public class Character extends LivingBeing {
     private String characterName;
     private String classType;
     private int xp;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user", referencedColumnName = "idUser")
     private User user;
     @ElementCollection

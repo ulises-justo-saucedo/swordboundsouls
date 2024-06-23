@@ -68,9 +68,9 @@ public class SwordboundSoulsController {
     @PostMapping("/logIn")
     public ModelAndView logIn(@ModelAttribute User user) {
         ModelAndView modelAndView = new ModelAndView();
-        if (userIsRegistered(user.getUsername(), user.getPassword())) {
-            if (userHasACharacter(user.getUsername())) {
-                modelAndView = manageWebPages("home", user.getUsername(), getCharacterByUsername(user.getUsername()).getCharacterName());
+        if (getUser(user.getUsername()) != null) {
+            if (getUser(user.getUsername()).getCharacter() != null) {
+                modelAndView = manageWebPages("home", user.getUsername(), getUser(user.getUsername()).getCharacter().getCharacterName());
             } else {
                 modelAndView = passEntitiesToViewAndSetView(user.getUsername(), "createCharacter");
             }
@@ -155,11 +155,15 @@ public class SwordboundSoulsController {
     @GetMapping("/createCharacter")
     public ModelAndView createCharacter(@RequestParam("characterName") String characterName, @RequestParam("classType") String classType, @RequestParam("username") String username) {
         ModelAndView modelAndView = new ModelAndView();
-        if (characterAlreadyExists(characterName)) {
+        if (getCharacterByName(characterName) != null) {
             //Name already taken. User has to choose another
             modelAndView = passEntitiesToViewAndSetView(username, "createCharacter");
         } else {
-            createNewCharacter(setCharacterAttributes(characterName, classType, uService.getUser(username)));
+            Character newCharacter = setCharacterAttributes(characterName, classType, uService.getUser(username));
+            User user = uService.getUser(username);
+            user.setCharacter(newCharacter);
+            createNewCharacter(newCharacter);
+            uService.registerNewUser(user);
             modelAndView = manageWebPages("home", username, characterName);
         }
         return modelAndView;
@@ -300,10 +304,6 @@ public class SwordboundSoulsController {
         return uService.getUser(username);
     }
 
-    public boolean userIsRegistered(String username, String pass) {
-        return uService.verifyIfUserExists(username, pass);
-    }
-
     public void registerNewUser(User user) {
         uService.registerNewUser(user);
     }
@@ -313,8 +313,8 @@ public class SwordboundSoulsController {
     }
 
     //Service Methods - CharacterEntity
-    public Character getCharacterByUsername(String username) {
-        return cService.getCharacterByUsername(username);
+    public Character getCharacterByUsername(User user) {
+        return cService.getCharacterByUsername(user);
     }
 
     public Character getCharacterByName(String name) {
@@ -323,14 +323,6 @@ public class SwordboundSoulsController {
 
     public List<Character> getAllCharacters() {
         return cService.getAllCharacters();
-    }
-
-    public boolean userHasACharacter(String username) {
-        return cService.verifyIfUserHasCharacter(username);
-    }
-
-    public boolean characterAlreadyExists(String characterName) {
-        return cService.verifyIfCharacterExists(characterName);
     }
 
     public void createNewCharacter(Character cE) {

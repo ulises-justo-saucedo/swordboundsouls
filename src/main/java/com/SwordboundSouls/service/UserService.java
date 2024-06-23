@@ -11,17 +11,13 @@ import com.SwordboundSouls.repository.UserRepository;
 public class UserService {
 	@Autowired
 	private UserRepository uRepo;
-	
-	public boolean verifyIfUserExists(String username,String pass) {
-		return uRepo.verifyIfUserExists(username, pass) == 1;
-	}
-	
+
 	public void registerNewUser(User user) {
 		uRepo.save(user);
 	}
 	
 	public User getUser(String username) {
-		return uRepo.findByUsername(username);
+		return uRepo.findByUsername(username).orElse(null);
 	}
 	
 	public List<User> getAllUsers(){

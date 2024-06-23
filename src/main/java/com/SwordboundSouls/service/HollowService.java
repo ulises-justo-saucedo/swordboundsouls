@@ -10,7 +10,7 @@ public class HollowService {
 	private HollowRepository hRepo;
 	
 	public Hollow getHollow(String hollowName) {
-		return hRepo.getHollow(hollowName);
+		return hRepo.findByHollowName(hollowName).orElse(null);
 	}
 	public List<Hollow> getAllHollows(){
 		return hRepo.findAll();

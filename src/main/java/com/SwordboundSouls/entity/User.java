@@ -21,7 +21,7 @@ public class User {
     private String username;
     private String password;
     private boolean isAdmin;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_character", referencedColumnName = "idCharacter")
     private Character character;
 

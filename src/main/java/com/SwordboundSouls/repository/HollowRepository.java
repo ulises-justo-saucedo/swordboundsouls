@@ -4,8 +4,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.SwordboundSouls.entity.Hollow;
+
+import java.io.Serializable;
+import java.util.Optional;
+
 @Repository
-public interface HollowRepository extends JpaRepository<Hollow,String> {
-	@Query(value="SELECT * FROM hollows WHERE hollow_name = :hollowName",nativeQuery=true)
-	public Hollow getHollow(@Param("hollowName") String hollowName);
+public interface HollowRepository extends JpaRepository<Hollow, Serializable> {
+	public Optional<Hollow> findByHollowName(String hollowName);
 }
