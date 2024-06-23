@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="/manageWebPages" method="GET">
+		<ul>
+			<li><button type="submit" name="webPage" value="home">Home</button></li>
+			<li><button type="submit" name="webPage" value="train">Train</button></li>
+			<li><button type="submit" name="webPage" value="huntHollows">Hunt Hollows</button></li>
+			<li><button type="submit" name="webPage" value="worldBosses">Battle with world bosses</button></li>
+			<li><button type="submit" name="webPage" value="shop">Shop</button></li>
+			<li><button type="submit" name="webPage" value="index">Log out</button></li>
+		</ul>
+		<input type="hidden" name="username" th:value="${user.username}">
+		<input type="hidden" name="characterName" th:value="${character.characterName}">
+	</form>
+	<div th:if="${user.isAdmin}">
+		<h3>Realize CRUD operations over...</h3>
+		<form action="/manageAdminWebPages" method="POST">
+			<li><button type="submit" name="webPage" value="usersCrud">Users</button></li>
+			<li><button type="submit" name="webPage" value="charactersCrud">Characters</button></li>
+			<li><button type="submit" name="webPage" value="hollowsCrud">Hollows</button></li>
+			<input type="hidden" name="username" th:value="${user.username}">
+			<input type="hidden" name="characterName" th:value="${character.characterName}">
+		</form>
+	</div>
+	<h1>These are all the users registered in our page: </h1>
+	<table>
+		<tr>
+			<th>Username</th>
+			<th>Password</th>
+		</tr>
+		<tr th:each="u: ${allUsers}">
+			<td><span th:text="${u.username}"></span></td>
+			<td><span th:text="${u.pass}"></span></td>
+		</tr>
+	</table>
+</body>
+</html>
