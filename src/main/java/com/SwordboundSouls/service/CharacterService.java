@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.SwordboundSouls.entity.Characters;
+import com.SwordboundSouls.entity.Character;
 import com.SwordboundSouls.repository.CharacterRepository;
 
 @Service
@@ -22,22 +22,22 @@ public class CharacterService {
 		return pRepo.verifyIfCharacterExists(characterName) == 1;
 	}
 	
-	public void createNewCharacter(Characters pE) {
+	public void createNewCharacter(Character pE) {
 		pRepo.save(setBasicSkillsForEveryCharacter(pE));
 	}
-	public Characters setBasicSkillsForEveryCharacter(Characters pE){
-		pE.getPhysicalSkills().add("Zanpaku-tō");
-		pE.getKidoSkills().add("Shō");
+	public Character setBasicSkillsForEveryCharacter(Character pE){
+		//pE.getPhysicalSkills().add("Zanpaku-tō");
+		//pE.getKidoSkills().add("Shō");
 		return pE;
 	}
-	public Characters getCharacterByName(String characterName) {
+	public Character getCharacterByName(String characterName) {
 		return pRepo.getCharacterByName(characterName);
 	}
 	
-	public Characters getCharacterByUsername(String username) {
+	public Character getCharacterByUsername(String username) {
 		return pRepo.getCharacterByUsername(username);
 	}
-	public List<Characters> getAllCharacters(){
+	public List<Character> getAllCharacters(){
 		return pRepo.findAll();
 	}
 }

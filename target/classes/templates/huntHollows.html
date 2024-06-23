@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Hunting Hollows</title>
+</head>
+<body>
+	<form action="/manageWebPages" method="GET">
+		<ul>
+			<li><button type="submit" name="webPage" value="home">Home</button></li>
+			<li><button type="submit" name="webPage" value="train">Train</button></li>
+			<li><button type="submit" name="webPage" value="huntHollows">Hunt Hollows</button></li>
+			<li><button type="submit" name="webPage" value="worldBosses">Battle with world bosses</button></li>
+			<li><button type="submit" name="webPage" value="shop">Shop</button></li>
+			<li><button type="submit" name="webPage" value="index">Log out</button></li>
+		</ul>
+		<input type="hidden" name="username" th:value="${user.username}">
+		<input type="hidden" name="characterName" th:value="${character.characterName}">
+	</form>
+	<h1>Which Hollow will you try to hunt?</h1>
+	<form action="/preparingHollowHunt" method="GET">
+		<input type="hidden" name="username" th:value="${user.username}">
+		<input type="hidden" name="characterName" th:value="${character.characterName}">
+		<table th:each="hollow : ${hollows}">
+			<tr>
+				<th><span th:text="${hollow.hollowName}"></span></th>
+				<!--<th>Description</th>-->
+				<th>Health</th>
+				<th>Attack</th>
+				<th>Defence</th>
+				<th>Reiatsu</th>
+				<th>Level</th>
+				<th>Action</th>
+			</tr>
+			<tr>
+				<td><img th:src="${hollow.aspect}" height="150px"></td>
+				<!--<td><span th:text="${hollow.hollowDescription}"></span></td>-->
+				<td><span th:text="${hollow.hp}"></span></td>
+				<td><span th:text="${hollow.atk}"></span></td>
+				<td><span th:text="${hollow.def}"></span></td>
+				<td><span th:text="${hollow.reiatsu}"></span></td>
+				<td><span th:text="${hollow.lvl}"></span></td>
+				<td><button type="submit" name="hollowName" th:value="${hollow.hollowName}">Hunt!</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

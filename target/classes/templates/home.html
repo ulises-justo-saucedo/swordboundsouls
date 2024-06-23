@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Home</title>
+</head>
+
+<body>
+	<form action="/manageWebPages" method="GET">
+		<ul>
+			<li><button type="submit" name="webPage" value="home">Home</button></li>
+			<li><button type="submit" name="webPage" value="train">Train</button></li>
+			<li><button type="submit" name="webPage" value="huntHollows">Hunt Hollows</button></li>
+			<li><button type="submit" name="webPage" value="worldBosses">Battle with world bosses</button></li>
+			<li><button type="submit" name="webPage" value="shop">Shop</button></li>
+			<li><button type="submit" name="webPage" value="index">Log out</button></li>
+		</ul>
+		<input type="hidden" name="username" th:value="${user.username}">
+		<input type="hidden" name="characterName" th:value="${character.characterName}">
+	</form>
+		<div th:if="${user.isAdmin}">
+		<h3>Realize CRUD operations over...</h3>
+		<form action="/manageAdminWebPages" method="POST">
+			<li><button type="submit" name="webPage" value="usersCrud">Users</button></li>
+			<li><button type="submit" name="webPage" value="charactersCrud">Characters</button></li>
+			<li><button type="submit" name="webPage" value="hollowsCrud">Hollows</button></li>
+			<input type="hidden" name="username" th:value="${user.username}">
+			<input type="hidden" name="characterName" th:value="${character.characterName}">
+		</form>
+	</div>
+	<h1>Welcome to Swordbound Souls, <span th:text="${user.username}"></span>!</h1>
+	<h2>Summary of your character:</h2>
+	<table>
+		<tr>
+			<th><span th:text="${character.characterName}"></span></th>
+			<th>Class</th>
+			<th>Health</th>
+			<th>Attack</th>
+			<th>Defence</th>
+			<th>Reiatsu</th>
+			<th>Experience (EXP)</th>
+			<th>Level</th>
+		</tr>
+		<tr>
+			<td><img th:src="${character.aspect}" height="200px"></td>
+			<td><center><span th:text="${character.classType}"></span></center></td>
+			<td><center><span th:text="${character.hp}"></span></center></td>
+			<td><center><span th:text="${character.atk}"></span></center></td>
+			<td><center><span th:text="${character.def}"></span></center></td>
+			<td><center><span th:text="${character.reiatsu}"></span></center></td>
+			<td><center><span th:text="${character.xp}"></span></center></td>
+			<td><center><span th:text="${character.lvl}"></span></center></td>
+		</tr>
+	</table>
+</body>
+
+</html>
