@@ -25,6 +25,12 @@ public class User {
     @JoinColumn(name = "id_character", referencedColumnName = "idCharacter")
     private Character character;
 
+    public User(String username, String password){
+        super();
+        this.username = username;
+        this.password = password;
+    }
+
     public User(String username, String password, boolean isAdmin) {
         super();
         this.username = username;
