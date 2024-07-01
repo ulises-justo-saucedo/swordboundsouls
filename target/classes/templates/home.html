@@ -19,6 +19,11 @@
 		<input type="hidden" name="username" th:value="${user.username}">
 		<input type="hidden" name="characterName" th:value="${character.characterName}">
 	</form>
+	<form action="/logout" method="POST">
+		<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+		<button type="submit">Logout</button>
+	</form>
+	<!--
 		<div th:if="${user.isAdmin}">
 		<h3>Realize CRUD operations over...</h3>
 		<form action="/manageAdminWebPages" method="POST">
@@ -29,6 +34,7 @@
 			<input type="hidden" name="characterName" th:value="${character.characterName}">
 		</form>
 	</div>
+	-->
 	<h1>Welcome to Swordbound Souls, <span th:text="${user.username}"></span>!</h1>
 	<h2>Summary of your character:</h2>
 	<table>

@@ -24,7 +24,7 @@ public class Character extends LivingBeing {
     private String classType;
     private int xp;
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_user", referencedColumnName = "idUser")
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User user;
     @ElementCollection
     private List<String> physicalSkills;

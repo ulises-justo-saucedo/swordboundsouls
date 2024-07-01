@@ -32,7 +32,7 @@ public class CreateCharacterController {
             User user = userService.getUser(username);
             user.setCharacter(newCharacter);
             characterService.createNewCharacter(newCharacter);
-            userService.registerNewUser(user);
+            userService.updateUser(user);
             modelAndView.addObject("user", user);
             modelAndView.addObject("character", newCharacter);
             modelAndView.setViewName("home");

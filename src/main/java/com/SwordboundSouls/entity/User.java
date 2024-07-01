@@ -1,10 +1,13 @@
 package com.SwordboundSouls.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -12,38 +15,41 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUser;
+    private int id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
-    private boolean isAdmin;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_role", referencedColumnName = "idRole")
+    )
+    private List<Role> userRoles;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_character", referencedColumnName = "idCharacter")
     private Character character;
 
-    public User(String username, String password){
+    public User(String username, String password, Character character) {
         super();
         this.username = username;
         this.password = password;
-    }
-
-    public User(String username, String password, boolean isAdmin) {
-        super();
-        this.username = username;
-        this.password = password;
-        this.isAdmin = isAdmin;
-    }
-
-    public User(String username, String password, boolean isAdmin, Character character) {
-        super();
-        this.username = username;
-        this.password = password;
-        this.isAdmin = isAdmin;
         this.character = character;
+        this.userRoles = new ArrayList<>();
     }
 
+    public User(String username, String password) {
+        super();
+        this.username = username;
+        this.password = password;
+        this.userRoles = new ArrayList<>();
+    }
 }

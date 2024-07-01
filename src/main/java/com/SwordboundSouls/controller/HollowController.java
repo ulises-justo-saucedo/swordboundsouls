@@ -2,7 +2,6 @@ package com.SwordboundSouls.controller;
 
 import com.SwordboundSouls.entity.CharacterFighting;
 import com.SwordboundSouls.entity.HollowFighting;
-import com.SwordboundSouls.entity.User;
 import com.SwordboundSouls.service.CharacterService;
 import com.SwordboundSouls.service.HollowService;
 import com.SwordboundSouls.service.UserService;

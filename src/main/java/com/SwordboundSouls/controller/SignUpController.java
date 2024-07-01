@@ -20,16 +20,16 @@ public class SignUpController {
     }
 
     @PostMapping("/register")
-    public ModelAndView registerUser(@RequestParam("username") String username, @RequestParam("pass") String pass, @RequestParam("buttonPressed") String buttonPressed) {
+    public ModelAndView registerUser(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("buttonPressed") String buttonPressed) {
         ModelAndView modelAndView = new ModelAndView();
         if (usernameIsValid(username) && buttonPressed.equals("confirm")) {
-            uService.registerNewUser(new User(username, pass, false));
-            modelAndView.setViewName("index");
+            uService.registerNewUser(new User(username, password));
+            modelAndView.setViewName("redirect:/");
         } else {
-            modelAndView.setViewName("signUp");
+            modelAndView.setViewName("redirect:/signUpPage");
         }
         if (buttonPressed.equals("cancel")) {
-            modelAndView.setViewName("index");
+            modelAndView.setViewName("redirect:/");
         }
         return modelAndView;
     }
