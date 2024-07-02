@@ -12,6 +12,9 @@ public class HollowService {
 	public Hollow getHollow(String hollowName) {
 		return hRepo.findByHollowName(hollowName).orElse(null);
 	}
+	public Hollow getHollow(int idHollow){
+		return hRepo.findById(idHollow).orElse(null);
+	}
 	public List<Hollow> getAllHollows(){
 		return hRepo.findAll();
 	}

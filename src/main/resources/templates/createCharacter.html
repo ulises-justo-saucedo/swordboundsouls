@@ -8,7 +8,8 @@
 
 <body>
 	<h1>Looks like you don't have a character. Why don't you make one?</h1>
-	<form action="/createCharacter" method="GET">
+	<form action="/createcharactersuccess" method="POST">
+		<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 		<label>What name will have your character? </label>
 		<input type="text" name="characterName">
 		<br>

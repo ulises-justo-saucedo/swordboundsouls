@@ -8,7 +8,8 @@
 
 <body>
 	<h1>Looks like you don't have a character. Why don't you make one?</h1>
-	<form action="/createCharacter" method="GET">
+	<form action="/createcharactersuccess" method="POST">
+		<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 		<label>What name will have your character? </label>
 		<input type="text" name="characterName">
 		<br>
@@ -23,27 +24,33 @@
 				<td>
 					<input type="radio" name="classType" value="berserker">
 					<img src="https://i.imgur.com/pbwUTSW.png" height="250px">
-					<p>They inflict immense amounts of damage<br>
-					with their physical attacks; berserker's stats lack on Reiatsu,<br>
-					but they compensate it with huge amounts of attack and defense.<br>
-					 Ideal for close range combats.</p>
+					<p>
+						Berserk´s inflict immense amounts of damage
+						with their physical attacks; berserk's stats lack on Reiatsu,
+						but they compensate it with huge amounts of attack and defense.
+						Ideal for close range combats.
+					</p>
 				</td>
 				<td>
 					<input type="radio" name="classType" value="balanced">
 					<img src="https://i.imgur.com/8noIjw3.jpg" height="250px">
-					<p>Balanced characters are well known for their<br>
-					versatility in combat. They can last a good<br>
-					amount of time in close range combat, but also<br>
-					can keep the distance between their oponents<br>
-					to make use of Reiatsu.</p>
+					<p>
+						Balanced characters are well known for their
+						versatility in combat. Balanced characters last a good
+						amount of time in close range combat, but are also
+						able to keep distance between them and their opponents
+						to make use of Reiatsu.
+					</p>
 				</td>
 				<td>
 					<input type="radio" name="classType" value="spiritual">
 					<img src="https://i.imgur.com/S83m0qD.png" height="250px">
-					<p>Spiritual ones have a huge amount of Reiatsu.<br>
-					They engage in combat keeping the distance<br>
-					between them and their opponents in order<br>
-					to anihilate their opponents with powerful Reiatsu.</p>
+					<p>
+						Spiritual characters have a large amount of Reiatsu.
+						Spiritual characters engage in combat keeping the distance
+						between them and their opponents in order
+						to anihilate them with their powerful Reiatsu.
+					</p>
 					<br>
 				</td>
 			</tr>

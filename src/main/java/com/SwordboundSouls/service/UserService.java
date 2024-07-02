@@ -6,6 +6,7 @@ import com.SwordboundSouls.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -72,5 +73,19 @@ public class UserService implements UserDetailsService {
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
+    }
+
+    public User getCurrentAuthenticatedUser(){
+        return userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).orElse(null);
+    }
+
+    //TODO: Improve this
+    public boolean usernameIsNotValid(String username) {
+        return username.isEmpty();
+    }
+
+    //TODO: Improve this
+    public boolean passwordIsNotValid(String password){
+        return password.isEmpty();
     }
 }

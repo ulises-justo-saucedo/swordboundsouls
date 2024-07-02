@@ -1,7 +1,9 @@
 package com.SwordboundSouls.controller;
 
-import com.SwordboundSouls.entity.CharacterFighting;
-import com.SwordboundSouls.entity.HollowFighting;
+import com.SwordboundSouls.entity.Character;
+import com.SwordboundSouls.entity.Hollow;
+import com.SwordboundSouls.entity.User;
+import com.SwordboundSouls.helpers.ViewHelper;
 import com.SwordboundSouls.service.CharacterService;
 import com.SwordboundSouls.service.HollowService;
 import com.SwordboundSouls.service.UserService;
@@ -20,40 +22,37 @@ public class HollowController {
     @Autowired
     private HollowService hollowService;
 
-    @GetMapping("/huntHollows")
+    @GetMapping("/hunthollows")
     public ModelAndView huntHollows(){
-        ModelAndView modelAndView = new ModelAndView("huntHollows");
-        modelAndView.addObject("user", null); // Pass the user here through Spring Security
+        ModelAndView modelAndView = new ModelAndView(ViewHelper.HUNT_HOLLOWS);
+
         modelAndView.addObject("hollows", hollowService.getAllHollows());
+
         return modelAndView;
     }
 
-    @GetMapping("/preparingHollowHunt")
-    public ModelAndView preparingHollowHunt(@RequestParam("hollowName") String hollowName, @RequestParam("username") String username, @RequestParam("characterName") String characterName) {
-        ModelAndView modelAndView = new ModelAndView("preparingHollowHunt");
-        modelAndView.addObject("user", null); // Pass the user here through Spring Security
-        modelAndView.addObject("hollow", hollowService.getHollow(hollowName));
+    @GetMapping("/preparinghollowhunt")
+    public ModelAndView preparingHollowHunt(@RequestParam("idHollow") int idHollow) {
+        ModelAndView modelAndView = new ModelAndView(ViewHelper.PRE_HOLLOW_HUNT);
+        User user = userService.getCurrentAuthenticatedUser();
+
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("character", user.getCharacter());
+        modelAndView.addObject("hollow", hollowService.getHollow(idHollow));
+
         return modelAndView;
     }
 
     @GetMapping("/hunt")
-    public ModelAndView hunt(@RequestParam("buttonPressed") String buttonPressed, @RequestParam("username") String username, @RequestParam("characterName") String characterName, @RequestParam("hollowName") String hollowName) {
-        ModelAndView modelAndView = new ModelAndView();
-        if (buttonPressed.equals("confirm")) {
-            //Set things up for the combat
-            CharacterFighting cf = (CharacterFighting) characterService.getCharacterByName(characterName);
-            HollowFighting hf = (HollowFighting) hollowService.getHollow(hollowName);
-            //createNewCharacterFighting(cf);
-            //createNewHollowFighting(hf);
-            modelAndView.addObject("user", null); //Pass the user here through Spring Security
-            modelAndView.addObject("character", cf);
-            modelAndView.addObject("hollow", hf);
-            modelAndView.setViewName("huntingHollow");
-        } else {
-            modelAndView.setViewName("huntHollows");
-            modelAndView.addObject("user", null); // Pass the user here through Spring Security
-            modelAndView.addObject("hollows", hollowService.getAllHollows());
-        }
+    public ModelAndView hunt(@RequestParam("idHollow") int idHollow) {
+        ModelAndView modelAndView = new ModelAndView(ViewHelper.HUNTING_HOLLOW);
+        User user = userService.getCurrentAuthenticatedUser();
+        Hollow hollow = hollowService.getHollow(idHollow);
+
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("character", user.getCharacter());
+        modelAndView.addObject("hollow", hollow);
+
         return modelAndView;
     }
 /*

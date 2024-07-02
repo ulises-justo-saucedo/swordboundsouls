@@ -21,4 +21,16 @@ public abstract class LivingBeing {
     /*@ElementCollection
     protected List<String> skills;*/
 
+    protected void reduceHp(int dmg) {
+        setHp(getHp() - dmg);
+    }
+
+    protected boolean isDead() {
+        boolean isDead = false;
+        if (getHp() <= 0) {
+            isDead = true;
+        }
+        return isDead;
+    }
+
 }

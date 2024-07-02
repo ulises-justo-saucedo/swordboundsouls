@@ -1,15 +1,18 @@
 package com.SwordboundSouls.controller;
 
 import com.SwordboundSouls.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.SwordboundSouls.helpers.ViewHelper;
 import com.SwordboundSouls.service.CharacterService;
 import com.SwordboundSouls.service.HollowService;
 
 @Controller
+@RequestMapping("/admin")
 public class AdministratorController {
     @Autowired
     private UserService userService;
@@ -18,26 +21,30 @@ public class AdministratorController {
     @Autowired
     private HollowService hollowService;
 
-    @PostMapping("/manageAdminWebPages")
-    public ModelAndView manageAdminWebPages(@RequestParam("username") String username, @RequestParam("characterName") String characterName, @RequestParam("webPage") String webPage) {
-        ModelAndView modelAndView = new ModelAndView();
-        switch (webPage) {
-            case "usersCrud":
-                modelAndView.addObject("user", userService.getUser(username));
-                modelAndView.addObject("character", characterService.getCharacterByName(characterName));
-                modelAndView.addObject("allUsers", userService.getAllUsers());
-                modelAndView.setViewName("usersCrud");
-                break;
-            case "charactersCrud":
-                modelAndView.addObject("user", userService.getUser(username));
-                modelAndView.addObject("character", characterService.getCharacterByName(characterName));
-                modelAndView.addObject("allCharacters", characterService.getAllCharacters());
-                modelAndView.setViewName("charactersCrud");
-                break;
-            case "hollowsCrud":
-                break;
-        }
+    @GetMapping("/users")
+    public ModelAndView users(){
+        ModelAndView modelAndView = new ModelAndView(ViewHelper.USERS_CRUD);
+
+        modelAndView.addObject("users", userService.getAllUsers());
+
         return modelAndView;
     }
 
+    @GetMapping("/characters")
+    public ModelAndView characters(){
+        ModelAndView modelAndView = new ModelAndView(ViewHelper.CHARACTERS_CRUD);
+
+        modelAndView.addObject("characters", characterService.getAllCharacters());
+
+        return modelAndView;
+    }
+
+    @GetMapping("/hollows")
+    public ModelAndView hollows(){
+        ModelAndView modelAndView = new ModelAndView(ViewHelper.HOLLOWS_CRUD);
+
+        modelAndView.addObject("hollows", hollowService.getAllHollows());
+
+        return modelAndView;
+    }
 }

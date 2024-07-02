@@ -24,5 +24,4 @@ public class Hollow extends LivingBeing {
         this.hollowName = hollowName;
         this.hollowDescription = hollowDescription;
     }
-
 }

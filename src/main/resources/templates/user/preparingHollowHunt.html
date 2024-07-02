@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Preparing for hunt</title>
+</head>
+
+<body>
+	<div th:insert="navbar :: navbar"></div>
+	<h1><span th:text="${user.username}"></span>! You're currently trying to hunt <span
+			th:text="${hollow.hollowName}"></span></h1>
+	<table>
+		<tr>
+			<th th:text="${character.characterName}"></th>
+			<th></th>
+			<th th:text="${hollow.hollowName}"></th>
+		</tr>
+		<tr>
+			<td><img th:src="${character.aspect}" height="500px"></td>
+			<td><h2>¡VERSUS!</h2></td>
+			<td><img th:src="${hollow.aspect}" height="500px"></td>
+		</tr>
+	</table>
+	<p>This is all the information we got from <span th:text="${hollow.hollowName}"></span>:<br>
+		<span th:text="${hollow.hollowDescription}"></span>
+	</p>
+	<p>His stats are: </p>
+	<ul>
+		<li>Health: <span th:text="${hollow.hp}"></span></li>
+		<li>Attack: <span th:text="${hollow.atk}"></span></li>
+		<li>Defence: <span th:text="${hollow.def}"></span></li>
+		<li>Reiatsu: <span th:text="${hollow.reiatsu}"></span></li>
+		<li>Level: <span th:text="${hollow.lvl}"></span></li>
+	</ul>
+	<p>And <span th:text="${character.characterName}"></span>'s stats, your character, are: </p>
+	<ul>
+		<li>Health: <span th:text="${character.hp}"></span></li>
+		<li>Attack: <span th:text="${character.atk}"></span></li>
+		<li>Defence: <span th:text="${character.def}"></span></li>
+		<li>Reiatsu: <span th:text="${character.reiatsu}"></span></li>
+		<li>Level: <span th:text="${character.lvl}"></span></li>
+	</ul>
+	<p>Are you still wanting to hunt him?</p>
+	<form action="/hunt" method="GET">
+		<button type="submit">Yes! Take me to the fight!</button>
+		<a href="/hunthollows">No</a>
+		<input type="hidden" name="idHollow" th:value="${hollow.idHollow}">
+	</form>
+</body>
+
+</html>
