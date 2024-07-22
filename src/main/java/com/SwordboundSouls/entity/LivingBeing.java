@@ -18,19 +18,13 @@ public abstract class LivingBeing {
     protected int def;
     protected int reiatsu;
     protected int lvl;
-    /*@ElementCollection
-    protected List<String> skills;*/
+    protected int xp;
 
-    protected void reduceHp(int dmg) {
+    public void reduceHp(int dmg) {
         setHp(getHp() - dmg);
     }
 
-    protected boolean isDead() {
-        boolean isDead = false;
-        if (getHp() <= 0) {
-            isDead = true;
-        }
-        return isDead;
+    public boolean isDead() {
+        return getHp() <= 0;
     }
-
 }

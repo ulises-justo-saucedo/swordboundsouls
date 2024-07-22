@@ -3,7 +3,6 @@
 
 <head>
 	<meta charset="ISO-8859-1">
-	<script type="text/javascript" th:src="@{/js/hello.js}"></script>
 	<title>Currently hunting a Hollow!</title>
 </head>
 
@@ -26,7 +25,8 @@
 		<li>Defence: <span th:text="${hollow.def}"></span></li>
 		<li>Remaining Reiatsu: <span th:text="${hollow.reiatsu}"></span></li>
 	</ul>
-	<form action="/manageCombatAgainstHollow" method="GET">
+	<form action="/hunting" method="POST">
+		<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 		<h2>Choose your actions!</h2>
 		<h2>Attack with...</h2>
 		<h3>Physical Attacks: </h3>
@@ -48,10 +48,6 @@
 		<button type="submit">
 			<h2>End turn</h2>
 		</button>
-		<!-- Passing entities and data to controller -->
-		<input type="hidden" name="username" th:value="${user.username}">
-		<input type="hidden" name="characterName" th:value="${character.characterName}">
-		<input type="hidden" name="hollowName" th:value="${hollow.hollowName}">
 	</form>
 </body>
 
