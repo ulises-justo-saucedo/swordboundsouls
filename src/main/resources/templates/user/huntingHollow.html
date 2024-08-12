@@ -31,12 +31,12 @@
 		<h2>Attack with...</h2>
 		<h3>Physical Attacks: </h3>
 		<ul th:each="physAtk : ${character.physicalSkills}">
-			<li><input type="radio" name="attackAction" th:value="${physAtk}"><span th:text="${physAtk}"></span></input>
+			<li><input type="radio" name="attackAction" th:value="${physAtk.name}"><span th:text="${physAtk.name}"></span></input>
 			</li>
 		</ul>
 		<h3>Kido Attacks: </h3>
 		<ul th:each="kidoAtk : ${character.kidoSkills}">
-			<li><input type="radio" name="attackAction" th:value="${kidoAtk}"><span th:text="${kidoAtk}"></span></input>
+			<li><input type="radio" name="attackAction" th:value="${kidoAtk.name}"><span th:text="${kidoAtk.name}"></span></input>
 			</li>
 		</ul>
 		<h3 th:if="${#lists.size(character.buffs) > 0}">Buffs: </h3>

@@ -1,6 +1,5 @@
 package com.SwordboundSouls.controller;
 
-import com.SwordboundSouls.entity.Character;
 import com.SwordboundSouls.entity.Hollow;
 import com.SwordboundSouls.entity.User;
 import com.SwordboundSouls.helpers.ViewHelper;
@@ -9,14 +8,11 @@ import com.SwordboundSouls.service.FightService;
 import com.SwordboundSouls.service.HollowService;
 import com.SwordboundSouls.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @Controller
 public class HollowController {

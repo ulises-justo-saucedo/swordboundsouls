@@ -2,17 +2,14 @@ package com.SwordboundSouls.service;
 
 import java.util.List;
 
-import com.SwordboundSouls.entity.Hollow;
-import com.SwordboundSouls.entity.User;
+import com.SwordboundSouls.entity.*;
+import com.SwordboundSouls.entity.Character;
 import com.SwordboundSouls.utils.characterclasses.Berserker;
 import com.SwordboundSouls.utils.characterclasses.Equilibrium;
 import com.SwordboundSouls.utils.characterclasses.Spiritual;
-import com.SwordboundSouls.utils.skills.character.KidoSkills;
-import com.SwordboundSouls.utils.skills.character.PhysicalSkills;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.SwordboundSouls.entity.Character;
 import com.SwordboundSouls.repository.CharacterRepository;
 
 @Service
@@ -20,9 +17,48 @@ public class CharacterService {
 	@Autowired
 	private CharacterRepository pRepo;
 
+	@Autowired
+	private PhysicalSkillService physicalSkillService;
+
+	@Autowired
+	private KidoSkillService kidoSkillService;
+
+	public void determineCharacterStatsAfterBuffing(String buff) {
+
+	}
+
+	public int determineCharacterDamage(String attackAction, Character character) {
+		int dmg = determinePhysicalDmg(attackAction, character);
+
+		if(dmg == -1)
+			dmg = determineReiatsuDmg(attackAction, character);
+
+		return dmg;
+	}
+
+	public int determinePhysicalDmg(String attackAction, Character character) {
+		int dmg = -1;
+		PhysicalSkill physicalSkill = physicalSkillService.getByName(attackAction);
+
+		if(physicalSkill != null)
+			dmg = physicalSkillService.calculateDamage(character.getAtk(), character.getReiatsu(), physicalSkill.getModifier());
+
+		return dmg;
+	}
+
+	public int determineReiatsuDmg(String attackAction, Character character) {
+		int dmg = -1;
+		KidoSkill kidoSkill = kidoSkillService.getByName(attackAction);
+
+		if(kidoSkill != null)
+			dmg = kidoSkillService.calculateDamage(character.getReiatsu(), kidoSkill.getModifier());
+
+		return dmg;
+	}
+
 	public void createNewCharacter(Character pE) {
-		pE.getPhysicalSkills().add(PhysicalSkills.BASIC_SKILL.getName());
-		pE.getKidoSkills().add(KidoSkills.BASIC_SKILL.getName());
+		pE.getPhysicalSkills().add(physicalSkillService.getById(1));
+		pE.getKidoSkills().add(kidoSkillService.getById(1));
 		pRepo.save(pE);
 	}
 

@@ -1,5 +1,6 @@
 package com.SwordboundSouls.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.SwordboundSouls.entity.Character;
@@ -12,6 +13,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FightService {
+    @Autowired
+    private CharacterService characterService;
+
     private Character character;
     private Hollow hollow;
 
@@ -33,7 +37,7 @@ public class FightService {
 
     private void buffCharacter(String buff){
         if(buff != null)
-            character.determineCharacterStatsAfterBuffing(buff);
+            characterService.determineCharacterStatsAfterBuffing(buff);
     }
 
     private void reduceCharacterHp(){
@@ -41,7 +45,7 @@ public class FightService {
     }
 
     private void reduceHollowHp(String attack){
-        hollow.reduceHp(character.determineCharacterDamage(attack));
+        hollow.reduceHp(characterService.determineCharacterDamage(attack, character));
     }
 
     public boolean characterWon(){

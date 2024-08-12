@@ -2,11 +2,6 @@ package com.SwordboundSouls.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.SwordboundSouls.utils.skills.character.KidoSkills;
-import com.SwordboundSouls.utils.skills.character.KidoSkillsAttributes;
-import com.SwordboundSouls.utils.skills.character.PhysicalSkills;
-import com.SwordboundSouls.utils.skills.character.PhysicalSkillsAttributes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,12 +27,15 @@ public class Character extends LivingBeing {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User user;
-    @ElementCollection
-    private List<String> physicalSkills;
-    @ElementCollection
-    private List<String> kidoSkills;
-    @ElementCollection
-    private List<String> buffs;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Column(name = "character_phys_skills")
+    private List<PhysicalSkill> physicalSkills;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Column(name = "character_kido_skills")
+    private List<KidoSkill> kidoSkills;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Column(name = "character_buff_skills")
+    private List<BuffSkill> buffs;
 
     public Character(String characterName, String classType, int xp, User user, String aspect, int hp, int atk, int def, int reiatsu, int lvl) {
         super(aspect, hp, atk, def, reiatsu, lvl, xp);
@@ -58,48 +56,4 @@ public class Character extends LivingBeing {
         return (int) (5 * Math.pow(getLvl(), 3));
     }
 
-    public void determineCharacterStatsAfterBuffing(String buff) {
-
-    }
-
-    public int determineCharacterDamage(String attackAction) {
-        int dmg = determinePhysicalDmg(attackAction);
-
-        if(dmg == -1)
-            dmg = determineReiatsuDmg(attackAction);
-
-        return dmg;
-    }
-
-    public int determinePhysicalDmg(String attackAction) {
-        int dmg = -1;
-        int i = 0;
-
-        while(dmg == -1 && i < PhysicalSkills.SKILLS.size()){
-            PhysicalSkillsAttributes p = PhysicalSkills.SKILLS.get(i);
-
-            if(p.getName().equalsIgnoreCase(attackAction))
-                dmg = p.calculateDamage(atk, reiatsu);
-
-            i++;
-        }
-
-        return dmg;
-    }
-
-    public int determineReiatsuDmg(String attackAction) {
-        int dmg = -1;
-        int i = 0;
-
-        while(dmg == -1 && i < KidoSkills.SKILLS.size()){
-            KidoSkillsAttributes k = KidoSkills.SKILLS.get(i);
-
-            if(k.getName().equalsIgnoreCase(attackAction))
-                dmg = k.calculateDamage(reiatsu);
-
-            i++;
-        }
-
-        return dmg;
-    }
 }
