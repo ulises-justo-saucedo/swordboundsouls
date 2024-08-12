@@ -1,7 +1,7 @@
 package com.SwordboundSouls.utils.runners;
 
 import com.SwordboundSouls.entity.Hollow;
-import com.SwordboundSouls.repository.HollowRepository;
+import com.SwordboundSouls.repository.IHollowRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,12 +14,12 @@ import java.util.List;
 public class HollowDataRunner implements CommandLineRunner {
 
     @Autowired
-    private final HollowRepository hollowRepository;
+    private final IHollowRepository IHollowRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        if(hollowRepository.count() == 0){
-            hollowRepository.saveAll(
+        if(IHollowRepository.count() == 0){
+            IHollowRepository.saveAll(
                     List.of(
                             new Hollow("https://i.imgur.com/7fOisXy.jpg", 150, 5, 5, 10, 1, 20, "Fishbone D", "Fishbone D is a large humanoid Hollow with a fish-like mask and a dorsal fin on his back. His shoulders and arms are plated with what appears to be part of his mask, and his body is covered with dark gray stripes, resembling the scales of a fish."),
                             new Hollow("https://i.imgur.com/R5i08jm.jpg", 200, 35, 5, 25, 3, 50, "Hexapodus", "Hexapodus resembles a large six-legged insect. He has gray green skin with orange joints, as well as orange spots on his back. His mask is plain white with a humanoid face."),

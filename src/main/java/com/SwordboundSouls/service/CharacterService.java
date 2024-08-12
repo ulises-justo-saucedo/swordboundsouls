@@ -10,12 +10,12 @@ import com.SwordboundSouls.utils.characterclasses.Spiritual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.SwordboundSouls.repository.CharacterRepository;
+import com.SwordboundSouls.repository.ICharacterRepository;
 
 @Service
 public class CharacterService {
 	@Autowired
-	private CharacterRepository pRepo;
+	private ICharacterRepository pRepo;
 
 	@Autowired
 	private PhysicalSkillService physicalSkillService;

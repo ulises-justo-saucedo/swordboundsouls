@@ -2,7 +2,7 @@ package com.SwordboundSouls.service;
 
 import com.SwordboundSouls.entity.Role;
 import com.SwordboundSouls.entity.User;
-import com.SwordboundSouls.repository.UserRepository;
+import com.SwordboundSouls.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,7 +19,7 @@ import java.util.List;
 @Service("userDetailsService")
 public class UserService implements UserDetailsService {
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
     private RoleService roleService;

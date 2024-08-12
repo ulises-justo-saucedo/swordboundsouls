@@ -8,6 +8,6 @@ import java.io.Serializable;
 import java.util.Optional;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Serializable> {
+public interface IRoleRepository extends JpaRepository<Role, Serializable> {
     Optional<Role> findByName(String name);
 }
