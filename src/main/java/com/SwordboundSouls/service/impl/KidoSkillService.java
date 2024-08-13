@@ -1,12 +1,13 @@
-package com.SwordboundSouls.service;
+package com.SwordboundSouls.service.impl;
 
 import com.SwordboundSouls.entity.KidoSkill;
 import com.SwordboundSouls.repository.IKidoSkillRepository;
+import com.SwordboundSouls.service.interfaces.IKidoSkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class KidoSkillService {
+public class KidoSkillService implements IKidoSkillService {
     @Autowired
     private IKidoSkillRepository kidoSkillRepository;
 

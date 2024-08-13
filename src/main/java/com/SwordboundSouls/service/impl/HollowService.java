@@ -1,11 +1,13 @@
-package com.SwordboundSouls.service;
+package com.SwordboundSouls.service.impl;
 import java.util.List;
+
+import com.SwordboundSouls.service.interfaces.IHollowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.SwordboundSouls.entity.Hollow;
 import com.SwordboundSouls.repository.IHollowRepository;
 @Service
-public class HollowService {
+public class HollowService implements IHollowService {
 	@Autowired
 	private IHollowRepository hRepo;
 	

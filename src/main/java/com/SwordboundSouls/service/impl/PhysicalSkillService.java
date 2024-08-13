@@ -1,12 +1,13 @@
-package com.SwordboundSouls.service;
+package com.SwordboundSouls.service.impl;
 
 import com.SwordboundSouls.entity.PhysicalSkill;
 import com.SwordboundSouls.repository.IPhysicalSkillRepository;
+import com.SwordboundSouls.service.interfaces.IPhysicalSkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PhysicalSkillService {
+public class PhysicalSkillService implements IPhysicalSkillService {
     @Autowired
     private IPhysicalSkillRepository physicalSkillRepository;
 

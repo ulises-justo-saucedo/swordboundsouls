@@ -1,4 +1,4 @@
-package com.SwordboundSouls.service;
+package com.SwordboundSouls.service.impl;
 
 import com.SwordboundSouls.entity.Role;
 import com.SwordboundSouls.entity.User;

@@ -1,9 +1,10 @@
-package com.SwordboundSouls.service;
+package com.SwordboundSouls.service.impl;
 
 import java.util.List;
 
 import com.SwordboundSouls.entity.*;
 import com.SwordboundSouls.entity.Character;
+import com.SwordboundSouls.service.interfaces.ICharacterService;
 import com.SwordboundSouls.utils.characterclasses.Berserker;
 import com.SwordboundSouls.utils.characterclasses.Equilibrium;
 import com.SwordboundSouls.utils.characterclasses.Spiritual;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.SwordboundSouls.repository.ICharacterRepository;
 
 @Service
-public class CharacterService {
+public class CharacterService implements ICharacterService {
 	@Autowired
 	private ICharacterRepository pRepo;
 
