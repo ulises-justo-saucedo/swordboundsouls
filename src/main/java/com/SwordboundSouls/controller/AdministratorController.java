@@ -1,6 +1,6 @@
 package com.SwordboundSouls.controller;
 
-import com.SwordboundSouls.service.UserService;
+import com.SwordboundSouls.service.impl.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.SwordboundSouls.helpers.ViewHelper;
-import com.SwordboundSouls.service.CharacterService;
-import com.SwordboundSouls.service.HollowService;
+import com.SwordboundSouls.service.impl.CharacterService;
+import com.SwordboundSouls.service.impl.HollowService;
 
 @Controller
 @RequestMapping("/admin")

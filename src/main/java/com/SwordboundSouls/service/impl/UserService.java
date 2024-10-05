@@ -2,6 +2,7 @@ package com.SwordboundSouls.service.impl;
 
 import com.SwordboundSouls.entity.Role;
 import com.SwordboundSouls.entity.User;
+import com.SwordboundSouls.helpers.Roles;
 import com.SwordboundSouls.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -59,8 +60,8 @@ public class UserService implements UserDetailsService {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 
         List<Role> roles = new ArrayList<>();
-        roles.add(roleService.findByName("USER"));
-        roles.add(roleService.findByName("ADMIN"));
+        roles.add(roleService.findByName(Roles.USER));
+        roles.add(roleService.findByName(Roles.ADMIN));
 
         user.setUserRoles(roles);
 

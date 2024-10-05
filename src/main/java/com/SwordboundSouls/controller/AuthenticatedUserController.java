@@ -2,7 +2,7 @@ package com.SwordboundSouls.controller;
 
 import com.SwordboundSouls.entity.User;
 import com.SwordboundSouls.helpers.ViewHelper;
-import com.SwordboundSouls.service.UserService;
+import com.SwordboundSouls.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

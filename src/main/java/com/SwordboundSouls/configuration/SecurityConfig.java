@@ -1,6 +1,6 @@
 package com.SwordboundSouls.configuration;
 
-import com.SwordboundSouls.service.UserService;
+import com.SwordboundSouls.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
